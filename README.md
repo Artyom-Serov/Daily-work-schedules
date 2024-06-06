@@ -1,1 +1,1 @@
-# Daily-work-schedules
+# Daily-work-schedulesCreating the main structure of the project
