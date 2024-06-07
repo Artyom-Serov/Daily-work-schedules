@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Графики{% endblock %}
+
+{% block content %}
+    <h2>Перечень графиков</h2>
+    <ul>
+        {% for schedule in schedules %}
+            <li>
+                <h2>{{ schedule.title }}</h2>
+                <p>{{ schedule.description }}</p>
+                <p>Автор: {{ schedule.author.username }}</p>
+                <p>Последние изменения: {{ schedule.last_modified }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
