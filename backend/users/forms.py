@@ -6,7 +6,10 @@ from .models import CustomUser
 class SignUpForm(UserCreationForm):
     class Meta:
         model = CustomUser
-        fields = ('username', 'first_name', 'last_name', 'password1', 'password2')
+        fields = (
+            # 'username', 'password1', 'password2'
+            'username', 'first_name', 'last_name', 'password1', 'password2'
+        )
 
 
 class UserForm(forms.ModelForm):
