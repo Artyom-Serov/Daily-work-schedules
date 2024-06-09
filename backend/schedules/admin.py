@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Schedule, Work, Resource
+from .models import Schedule, Work
 
 
 @admin.register(Schedule)
@@ -11,13 +11,9 @@ class ScheduleAdmin(admin.ModelAdmin):
 
 @admin.register(Work)
 class WorkAdmin(admin.ModelAdmin):
-    list_display = ('name', 'start_date', 'end_date', 'schedule')
-    search_fields = ('name', 'schedule__title')
+    list_display = (
+        'name', 'start_date', 'end_date', 'schedule',
+        'resource_name', 'resource_unit', 'resource_quantity'
+    )
+    search_fields = ('name', 'schedule__title', 'resource_name')
     list_filter = ('start_date', 'end_date', 'schedule')
-
-
-@admin.register(Resource)
-class ResourceAdmin(admin.ModelAdmin):
-    list_display = ('name', 'unit')
-    search_fields = ('name',)
-    list_filter = ('unit', 'name')
