@@ -1,5 +1,5 @@
 from django import forms
-from .models import Resource, Schedule, Work, WorkResource
+from .models import Schedule, Work
 
 
 class ScheduleForm(forms.ModelForm):
@@ -11,16 +11,11 @@ class ScheduleForm(forms.ModelForm):
 class WorkForm(forms.ModelForm):
     class Meta:
         model = Work
-        fields = ['name', 'start_date', 'end_date']
-
-
-class ResourceForm(forms.ModelForm):
-    class Meta:
-        model = Resource
-        fields = ['name', 'unit']
-
-
-class WorkResourceForm(forms.ModelForm):
-    class Meta:
-        model = WorkResource
-        fields = ['resource', 'quantity']
+        fields = [
+            'name', 'start_date', 'end_date',
+            'resource_name', 'resource_quantity', 'resource_unit'
+        ]
+        widgets = {
+            'start_date': forms.DateInput(attrs={'type': 'date'}),
+            'end_date': forms.DateInput(attrs={'type': 'date'}),
+        }
