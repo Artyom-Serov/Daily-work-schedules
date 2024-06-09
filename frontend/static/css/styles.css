@@ -15,12 +15,46 @@ header {
 .button {
     display: inline-block;
     padding: 10px 20px;
-    color: white;
-    background-color: #333;
+    margin: 5px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #2F4F4F; /* Оранжевый основной цвет */
+    text-align: center;
     text-decoration: none;
-    border-radius: 3px;
+    border-radius: 4px;
+    border: none;
     cursor: pointer;
 }
+
+.button:hover {
+    background-color: #008080; /* Оранжевый светлый при наведении */
+}
+
+.button:active {
+    background-color: #5F9EA0; /* Оранжевый темный при нажатии */
+}
+
+button.button {
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #dc3545; /* Красный основной цвет */
+    text-align: center;
+    text-decoration: none;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+}
+
+button.button:hover {
+    background-color: #c82333; /* Красный светлый при наведении */
+}
+
+button.button:active {
+    background-color: #bd2130; /* Красный темный при нажатии */
+}
+
 
 header h1 {
     margin: 0;

@@ -16,9 +16,6 @@
                 <th>Наименование</th>
                 <th>Дата начала</th>
                 <th>Дата окончания</th>
-                <th>Наименование ресурса</th>
-                <th>Количество</th>
-                <th>Единицы измерения</th>
             </tr>
         </thead>
         <tbody>
@@ -28,6 +25,19 @@
                     <td>{{ work.name }}</td>
                     <td>{{ work.start_date }}</td>
                     <td>{{ work.end_date }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        <thead>
+            <tr>
+                <th>Наименование ресурса</th>
+                <th>Количество</th>
+                <th>Единицы измерения</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for work in works %}
+                <tr>
                     <td>{{ work.resource_name }}</td>
                     <td>{{ work.resource_quantity }}</td>
                     <td>{{ work.resource_unit }}</td>
@@ -37,6 +47,6 @@
     </table>
 
     {% if user == schedule.author %}
-        <a href="{% url 'schedules:schedule_edit' schedule.pk %}">Редактировать график</a>
+        <a href="{% url 'schedules:schedule_edit' schedule.pk %}" class="button">Редактировать график</a>
     {% endif %}
 {% endblock %}

@@ -3,7 +3,7 @@
         <h1>Планирование работ</h1>
         <h2></h2>
         <div class="button-container">
-            <a href="{% url 'schedule_list' %}" class="button">Главная</a>
+            <a href="{% url 'schedules:schedule_list' %}" class="button">Главная</a>
             {% if user.is_authenticated %}
                 <a href="{% url 'profile' %}" class="button">Профиль</a>
                 <a href="{% url 'logout' %}" class="button">Выйти</a>

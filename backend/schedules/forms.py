@@ -19,3 +19,8 @@ class WorkForm(forms.ModelForm):
             'start_date': forms.DateInput(attrs={'type': 'date'}),
             'end_date': forms.DateInput(attrs={'type': 'date'}),
         }
+
+
+WorkFormSet = forms.inlineformset_factory(
+    Schedule, Work, form=WorkForm, extra=1, can_delete=True
+)

@@ -17,7 +17,7 @@ def user_login(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('schedule_list')
+                return redirect('schedules:schedule_list')
     else:
         form = forms.AuthenticationForm()
     return render(request, 'users/login.html', {'form': form})
@@ -25,7 +25,7 @@ def user_login(request):
 
 def user_logout(request):
     logout(request)
-    return redirect('schedule_list')
+    return redirect('schedules:schedule_list')
 
 
 def signup(request):
@@ -39,7 +39,7 @@ def signup(request):
             password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=password)
             login(request, user)
-            return redirect('schedule_list')
+            return redirect('schedules:schedule_list')
     else:
         form = SignUpForm()
     return render(request, 'users/signup.html', {'form': form})

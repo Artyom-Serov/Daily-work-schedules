@@ -7,6 +7,14 @@
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
+        {{ formset.management_form }}
+        {% for form in formset %}
+            {{ form.as_p }}
+            {% if form.instance.pk %}
+                <p><a href="{% url 'schedules:work_delete' form.instance.pk %}">Удалить работу</a></p>
+            {% endif %}
+        {% endfor %}
         <button type="submit">Сохранить</button>
+        <a href="{% url 'schedules:schedule_list' %}">Отмена</a>
     </form>
 {% endblock %}

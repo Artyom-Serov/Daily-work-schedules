@@ -1,68 +1,71 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
-from .models import Resource, Schedule, Work, WorkResource
-from .forms import ResourceForm, ScheduleForm, WorkForm
+from .models import Schedule, Work
+from .forms import ScheduleForm, WorkFormSet
 
 
 def schedule_list(request):
     schedules = Schedule.objects.all()
-    return render(
-        request,
-        'schedules/schedule_list.html',
-        {'schedule': schedules}
-    )
+    template = 'schedules/schedule_list.html'
+    return render(request, template, {'schedules': schedules})
 
 
 def schedule_detail(request, pk):
     schedule = get_object_or_404(Schedule, pk=pk)
     works = Work.objects.filter(schedule=schedule)
-    return render(
-        request,
-        'schedules/schedule_detail.html',
-        {'schedule': schedule, 'works': works}
-    )
+    template = 'schedules/schedule_detail.html'
+    return render(request, template, {'schedule': schedule, 'works': works})
 
 
 @login_required
 def schedule_create(request):
+    template = 'schedules/schedule_form.html'
     if request.method == 'POST':
         form = ScheduleForm(request.POST)
-        if form.is_valid():
+        formset = WorkFormSet(request.POST, instance=form.instance)
+        if form.is_valid() and formset.is_valid():
             schedule = form.save(commit=False)
             schedule.author = request.user
             schedule.save()
-            return redirect('schedule_detail', pk=schedule.pk)
+            formset.instance = schedule
+            formset.save()
+            return redirect('schedules:schedule_detail', pk=schedule.pk)
     else:
         form = ScheduleForm()
-    return render(
-        request,
-        'schedules/schedule_form.html',
-        {'form': form}
-    )
+        formset = WorkFormSet(instance=form.instance)
+    return render(request, template, {'form': form, 'formset': formset})
 
 
 @login_required
 def schedule_edit(request, pk):
     schedule = get_object_or_404(Schedule, pk=pk)
+    template = 'schedules/schedule_form.html'
     if request.method == 'POST':
         form = ScheduleForm(request.POST, instance=schedule)
-        if form.is_valid():
-            schedule = form.save(commit=False)
-            schedule.save()
-            return redirect('schedule_detail', pk=schedule.pk)
+        formset = WorkFormSet(request.POST, instance=schedule)
+        if form.is_valid() and formset.is_valid():
+            form.save()
+            formset.save()
+            return redirect('schedules:schedule_detail', pk=schedule.pk)
     else:
         form = ScheduleForm(instance=schedule)
-    return render(request, 'schedules/schedule_form.html', {'form': form})
+        formset = WorkFormSet(instance=schedule)
+    return render(request, template, {'form': form, 'formset': formset})
 
 
 @login_required
 def schedule_delete(request, pk):
     schedule = get_object_or_404(Schedule, pk=pk)
+    template = 'schedules/schedule_confirm_delete.html'
     if request.method == 'POST':
         schedule.delete()
-        return redirect('schedule_list')
-    return render(
-        request,
-        'schedules/schedule_confirm_delete.html',
-        {'schedule': schedule}
-    )
+        return redirect('schedules:schedule_list')
+    return render(request, template, {'schedule': schedule})
+
+
+@login_required
+def work_delete(request, pk):
+    work = get_object_or_404(Work, pk=pk)
+    schedule_pk = work.schedule.pk
+    work.delete()
+    return redirect('schedules:schedule_edit', pk=schedule_pk)
