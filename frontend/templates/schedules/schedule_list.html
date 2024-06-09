@@ -6,7 +6,7 @@
 {% load static %}
     <h2>Перечень графиков</h2>
     {% if user.is_authenticated %}
-        <a href="{% url 'schedule_create' %}">Добавить график</a>
+        <a href="{% url 'schedule:schedule_create' %}">Добавить график</a>
     {% endif %}
     <ul>
         {% for schedule in schedules %}

@@ -9,6 +9,6 @@
     <form method="post">
         {% csrf_token %}
         <button type="submit">Подтвердить</button>
-        <a href="{% url 'schedule_detail' schedule.pk %}">Отмена</a>
+        <a href="{% url 'schedules:schedule_detail' schedule.pk %}">Отмена</a>
     </form>
 {% endblock %}
