@@ -7,7 +7,8 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = CustomUser
         fields = (
-            'username', 'first_name', 'last_name', 'password1', 'password2'
+            'username', 'first_name', 'last_name',
+            'email', 'password1', 'password2'
         )
 
 
@@ -15,5 +16,5 @@ class UserForm(forms.ModelForm):
     class Meta:
         model = CustomUser
         fields = (
-            'username', 'first_name', 'last_name', 'password', 'email'
+            'username', 'first_name', 'last_name', 'email', 'password'
         )
