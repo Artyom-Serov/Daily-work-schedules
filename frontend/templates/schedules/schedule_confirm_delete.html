@@ -1,10 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block title %}Подтверждение удаления{% endblock %}
+
+{% block content %}
+    <h2>Вы уверены, что хотите удалить этот график?</h2>
+    <p>Название: {{ schedule.title }}</p>
+    <p>Описание: {{ schedule.description }}</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Подтвердить</button>
+        <a href="{% url 'schedule_detail' schedule.pk %}">Отмена</a>
+    </form>
+{% endblock %}

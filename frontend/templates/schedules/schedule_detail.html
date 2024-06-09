@@ -1,10 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block title %}{{ schedule.title }}{% endblock %}
+
+{% block content %}
+    <h2>{{ schedule.title }}</h2>
+    <p>{{ schedule.description }}</p>
+    <p>Автор: {{ schedule.author.username }}</p>
+    <p>Последние изменения: {{ schedule.last_modified }}</p>
+
+    <h3>Работы</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>№ п/п</th>
+                <th>Наименование</th>
+                <th>Дата начала</th>
+                <th>Дата окончания</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for work in works %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ work.name }}</td>
+                    <td>{{ work.start_date }}</td>
+                    <td>{{ work.end_date }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% if user == schedule.author %}
+        <a href="{% url 'schedule_edit' schedule.pk %}">Редактировать график</a>
+    {% endif %}
+{% endblock %}
