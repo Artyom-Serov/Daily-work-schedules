@@ -18,7 +18,8 @@
                 <a href="{% url 'schedules:schedule_detail' schedule.pk %}" class="button">Просмотр</a>
                 {% if user == schedule.author %}
                     <a href="{% url 'schedules:schedule_edit' schedule.pk %}" class="button">Редактировать</a>
-                    <form action="{% url 'schedules:schedule_delete' schedule.pk %}" method="post" style="display:inline">
+                    <form action="{% url 'schedules:schedule_delete' schedule.pk %}"
+                          method="post" style="display:inline">
                         {% csrf_token %}
                         <button type="submit" class="button">Удалить</button>
                     </form>

@@ -8,5 +8,5 @@
     <p>Имя: {{ user.first_name }}</p>
     <p>Фамилия: {{ user.last_name }}</p>
     <p>Адрес эл.почты {{ user.email }}</p>
-    <a href="{% url 'edit_profile' %}">Изменить профиль</a>
+    <a href="{% url 'edit_profile' %}" class="button">Изменить профиль</a>
 {% endblock %}
