@@ -4,14 +4,17 @@ from users.models import CustomUser
 
 class Schedule(models.Model):
     """Модель графика."""
-    title = models.CharField(max_length=200)
-    description = models.TextField(blank=True)
+    title = models.CharField(max_length=200, verbose_name='Название')
+    description = models.TextField(blank=True, verbose_name='Описание')
     author = models.ForeignKey(
         CustomUser,
         on_delete=models.CASCADE,
-        related_name='schedules'
+        related_name='schedules',
+        verbose_name='Автор'
     )
-    last_modified = models.DateTimeField(auto_now=True)
+    last_modified = models.DateTimeField(
+        auto_now=True, verbose_name='Дата последнего обновления'
+    )
 
     class Meta:
         verbose_name = 'График'
@@ -28,9 +31,22 @@ class Work(models.Model):
         on_delete=models.CASCADE,
         related_name='works'
     )
-    name = models.CharField(max_length=200)
-    start_date = models.DateField()
-    end_date = models.DateField()
+    name = models.CharField(max_length=200, verbose_name='Вид работ')
+    start_date = models.DateField(verbose_name='Дата начала')
+    end_date = models.DateField(verbose_name='Дата окончания')
+    resource_name = models.CharField(
+        max_length=150,
+        blank=True,
+        null=True,
+        verbose_name='Наименование ресурса'
+    )
+    resource_quantity = models.FloatField(verbose_name='Количество ресурса')
+    resource_unit = models.CharField(
+        max_length=50,
+        blank=True,
+        null=True,
+        verbose_name='Единицы измерения'
+    )
 
     class Meta:
         verbose_name = 'Работа'
@@ -38,38 +54,3 @@ class Work(models.Model):
 
     def __str__(self):
         return self.name
-
-
-class Resource(models.Model):
-    """Модель ресурса."""
-    name = models.CharField(max_length=150)
-    unit = models.CharField(max_length=50)
-
-    class Meta:
-        verbose_name = 'Ресурс'
-        verbose_name_plural = 'Ресурсы'
-
-    def __str__(self):
-        return self.name
-
-
-class WorkResource(models.Model):
-    """Ресурсы для работ с количеством."""
-    work = models.ForeignKey(
-        Work,
-        on_delete=models.CASCADE,
-        related_name='quantity'
-    )
-    resource = models.ForeignKey(
-        Resource,
-        on_delete=models.CASCADE,
-        related_name='quantity'
-    )
-    quantity = models.FloatField()
-
-    class Meta:
-        verbose_name = 'Количество ресурса'
-        verbose_name_plural = 'Количество ресурсов'
-
-    def __str__(self):
-        return f"{self.resource.name} for {self.work.name}"
