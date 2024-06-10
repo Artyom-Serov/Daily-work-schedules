@@ -5,8 +5,8 @@
 {% block content %}
     <h2>{{ schedule.title }}</h2>
     <p>{{ schedule.description }}</p>
-    <p>Автор: {{ schedule.author.username }}</p>
-    <p>Последние изменения: {{ schedule.last_modified }}</p>
+    <p>Автор: {{ schedule.author.first_name }} {{ schedule.author.last_name }}.
+       Последние изменения: {{ schedule.last_modified|date:"d.m.Y" }}</p>
 
     <h3>Работы</h3>
     <table>
@@ -30,6 +30,7 @@
         </tbody>
         <thead>
             <tr>
+                <th>№ п/п</th>
                 <th>Наименование ресурса</th>
                 <th>Количество</th>
                 <th>Единицы измерения</th>
@@ -38,6 +39,7 @@
         <tbody>
             {% for work in works %}
                 <tr>
+                    <td>{{ forloop.counter }}</td>
                     <td>{{ work.resource_name }}</td>
                     <td>{{ work.resource_quantity }}</td>
                     <td>{{ work.resource_unit }}</td>

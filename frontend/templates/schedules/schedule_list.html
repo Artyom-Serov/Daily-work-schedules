@@ -13,8 +13,8 @@
             <li>
                 <h2>{{ schedule.title }}</h2>
                 <p>{{ schedule.description }}</p>
-                <p>Автор: {{ schedule.author.username }}</p>
-                <p>Последние изменения: {{ schedule.last_modified }}</p>
+                <p>Автор: {{ schedule.author.first_name }} {{ schedule.author.last_name }}.
+                   Последние изменения: {{ schedule.last_modified|date:"d.m.Y" }}</p>
                 <a href="{% url 'schedules:schedule_detail' schedule.pk %}" class="button">Просмотр</a>
                 {% if user == schedule.author %}
                     <a href="{% url 'schedules:schedule_edit' schedule.pk %}" class="button">Редактировать</a>
