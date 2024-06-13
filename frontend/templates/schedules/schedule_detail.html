@@ -13,18 +13,26 @@
         <thead>
             <tr>
                 <th>№ п/п</th>
-                <th>Наименование</th>
+                <th>Вид работ</th>
                 <th>Дата начала</th>
                 <th>Дата окончания</th>
             </tr>
         </thead>
         <tbody>
-            {% for work in works %}
+            {% for work in schedule.works.all %}
                 <tr>
                     <td>{{ forloop.counter }}</td>
                     <td>{{ work.name }}</td>
                     <td>{{ work.start_date }}</td>
                     <td>{{ work.end_date }}</td>
+                    {% if user.is_authenticated and user == schedule.author %}
+                    <td>
+                        <a href="{% url 'schedules:work_update' pk=work.pk %}"
+                           class="button">Редактировать</a>
+                        <a href="{% url 'schedules:work_delete' pk=work.pk %}"
+                           class="button">Удалить</a>
+                    </td>
+                    {% endif %}
                 </tr>
             {% endfor %}
         </tbody>
@@ -37,18 +45,31 @@
             </tr>
         </thead>
         <tbody>
-            {% for work in works %}
-                <tr>
-                    <td>{{ forloop.counter }}</td>
-                    <td>{{ work.resource_name }}</td>
-                    <td>{{ work.resource_quantity }}</td>
-                    <td>{{ work.resource_unit }}</td>
-                </tr>
+            {% for work in schedule.works.all %}
+                {% for resource in work.resources.all %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ resource.name }}</td>
+                        <td>{{ resource.quantity }}</td>
+                        <td>{{ resource.unit }}</td>
+                        {% if user.is_authenticated and user == schedule.author %}
+                        <td>
+                            <a href="{% url 'schedules:resource_update' pk=resource.pk %}"
+                               class="button">Редактировать</a>
+                            <a href="{% url 'schedules:resource_delete' pk=resource.pk %}"
+                               class="button">Удалить</a>
+                        </td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
             {% endfor %}
         </tbody>
     </table>
 
     {% if user == schedule.author %}
-        <a href="{% url 'schedules:schedule_edit' schedule.pk %}" class="button">Редактировать график</a>
+        <a href="{% url 'schedules:schedule_update' pk=schedule.pk %}"
+           class="button">Редактировать график</a>
+        <a href="{% url 'schedules:schedule_delete' pk=schedule.pk %}"
+           class="button">Удалить график</a>
     {% endif %}
 {% endblock %}

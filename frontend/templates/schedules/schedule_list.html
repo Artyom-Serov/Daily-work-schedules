@@ -15,14 +15,13 @@
                 <p>{{ schedule.description }}</p>
                 <p>Автор: {{ schedule.author.first_name }} {{ schedule.author.last_name }}.
                    Последние изменения: {{ schedule.last_modified|date:"d.m.Y" }}</p>
-                <a href="{% url 'schedules:schedule_detail' schedule.pk %}" class="button">Просмотр</a>
+                <a href="{% url 'schedules:schedule_detail' schedule.pk %}"
+                   class="button">Просмотр</a>
                 {% if user == schedule.author %}
-                    <a href="{% url 'schedules:schedule_edit' schedule.pk %}" class="button">Редактировать</a>
-                    <form action="{% url 'schedules:schedule_delete' schedule.pk %}"
-                          method="post" style="display:inline">
-                        {% csrf_token %}
-                        <button type="submit" class="button">Удалить</button>
-                    </form>
+                    <a href="{% url 'schedules:schedule_update' schedule.pk %}"
+                       class="button">Редактировать</a>
+                    <a href="{% url 'schedules:schedule_delete' pk=schedule.pk %}"
+                       type="submit" class="button">Удалить график</a>
                 {% endif %}
             </li>
         {% endfor %}
