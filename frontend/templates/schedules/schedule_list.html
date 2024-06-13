@@ -21,7 +21,7 @@
                     <a href="{% url 'schedules:schedule_update' schedule.pk %}"
                        class="button">Редактировать</a>
                     <a href="{% url 'schedules:schedule_delete' pk=schedule.pk %}"
-                       type="submit" class="button">Удалить график</a>
+                       type="submit" class="button delete">Удалить график</a>
                 {% endif %}
             </li>
         {% endfor %}

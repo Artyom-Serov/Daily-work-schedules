@@ -7,7 +7,7 @@
     <p>Вы уверены, что хотите удалить ресурс "{{ resource.name }}"?</p>
     <form method="post">
         {% csrf_token %}
-        <button type="submit" class="button">Да, удалить</button>
+        <button type="submit" class="button delete">Да, удалить</button>
         <a href="{% url 'schedules:schedule_detail' pk=resource.work.schedule.pk %}"
            class="button">Отмена</a>
     </form>

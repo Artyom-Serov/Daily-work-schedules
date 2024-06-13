@@ -9,7 +9,7 @@
         {{ form.as_p }}
         <h3>Указать вид работ</h3>
         {{ work_form.as_p }}
-        <button type="submit" class="button">Сохранить</button>
+        <button type="submit" class="button delete">Сохранить</button>
         <a href="{% url 'schedules:schedule_list' %}" class="button">К списку графиков</a>
     </form>
 {% endblock %}

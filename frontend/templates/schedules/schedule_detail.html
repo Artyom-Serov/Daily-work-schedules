@@ -30,7 +30,7 @@
                         <a href="{% url 'schedules:work_update' pk=work.pk %}"
                            class="button">Редактировать</a>
                         <a href="{% url 'schedules:work_delete' pk=work.pk %}"
-                           class="button">Удалить</a>
+                           class="button delete">Удалить</a>
                     </td>
                     {% endif %}
                 </tr>
@@ -57,7 +57,7 @@
                             <a href="{% url 'schedules:resource_update' pk=resource.pk %}"
                                class="button">Редактировать</a>
                             <a href="{% url 'schedules:resource_delete' pk=resource.pk %}"
-                               class="button">Удалить</a>
+                               class="button delete">Удалить</a>
                         </td>
                         {% endif %}
                     </tr>
@@ -70,6 +70,6 @@
         <a href="{% url 'schedules:schedule_update' pk=schedule.pk %}"
            class="button">Редактировать график</a>
         <a href="{% url 'schedules:schedule_delete' pk=schedule.pk %}"
-           class="button">Удалить график</a>
+           class="button delete">Удалить график</a>
     {% endif %}
 {% endblock %}

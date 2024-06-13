@@ -7,7 +7,7 @@
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="button">Сохранить</button>
+        <button type="submit" class="button delete">Сохранить</button>
         <a href="{% url 'schedules:schedule_detail' pk=form.instance.pk %}"
            class="button">Вернуться к графику</a>
         <a href="{% url 'schedules:schedule_list' %}" class="button">К списку графиков</a>
