@@ -1,5 +1,5 @@
 from django import forms
-from .models import Schedule, Work
+from .models import Resource, Schedule, Work
 
 
 class ScheduleForm(forms.ModelForm):
@@ -7,68 +7,48 @@ class ScheduleForm(forms.ModelForm):
     class Meta:
         model = Schedule
         fields = ['title', 'description']
+        labels = {
+            'title': 'Название',
+            'description': 'Описание',
+        }
 
 
 class WorkForm(forms.ModelForm):
-    """Форма для создания и редактирования работ, ресурсов."""
+    """Форма для создания и редактирования работ."""
     class Meta:
         model = Work
-        fields = [
-            'name', 'start_date', 'end_date',
-            'resource_name', 'resource_quantity', 'resource_unit'
-        ]
+        fields = ['name', 'start_date', 'end_date']
+        labels = {
+            'name': 'Вид работ',
+            'start_date': 'Дата начала',
+            'end_date': 'Дата окончания',
+        }
         widgets = {
             'start_date': forms.DateInput(attrs={'type': 'date'}),
             'end_date': forms.DateInput(attrs={'type': 'date'}),
         }
 
 
-class BaseWorkFormSet(forms.BaseInlineFormSet):
-    """Набор форм для работ с кастомной валидацией."""
-    def clean(self):
-        """Проверка наличия дат для каждой работы."""
-        if any(self.errors):
-            return
-        for form in self.forms:
-            if not form.cleaned_data.get('name') or not form.cleaned_data.get(
-                    'start_date'
-            ) or not form.cleaned_data.get('end_date'):
-                raise forms.ValidationError(
-                    'Каждая работа должа иметь дату начала и окончания'
-                )
-        super().clean()
+class ResourceForm(forms.ModelForm):
+    """Форма для создания и редактирования ресурсов."""
+    class Meta:
+        model = Resource
+        fields = ['name', 'quantity', 'unit']
+        labels = {
+            'name': 'Наименование ресурса',
+            'quantity': 'Количество ресурса',
+            'unit': 'Единицы измерения',
+        }
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'quantity': forms.NumberInput(attrs={'class': 'form-control'}),
+            'unit': forms.TextInput(attrs={'class': 'form-control'}),
+        }
 
 
 WorkFormSet = forms.inlineformset_factory(
-    Schedule, Work, form=WorkForm, formset=BaseWorkFormSet, extra=1,
-    can_delete=True
+    Schedule, Work, form=WorkForm, extra=1, can_delete=True
 )
-
-
-class BaseResourceFormSet(forms.BaseInlineFormSet):
-    """Набор форм для ресурсов с кастомной валидацией."""
-    def clean(self):
-        """
-        Проверка наличия количества и единиц измерения у каждого ресурса.
-        """
-        if any(self.errors):
-            return
-        for form in self.forms:
-            if form.cleaned_data and form.cleaned_data.get(
-                'resource_name'
-            ) and (not form.cleaned_data.get(
-                'resource_quantity'
-            ) or not form.cleaned_data.get(
-                'resource_unit'
-            )):
-                raise forms.ValidationError(
-                    'Если указано название ресурса, то количество '
-                    'и единицы измерения тоже должны быть указаны.'
-                )
-        super().clean()
-
-
 ResourceFormSet = forms.inlineformset_factory(
-    Work, Work, form=WorkForm, formset=BaseResourceFormSet, extra=1,
-    can_delete=True
+    Work, Resource, form=ResourceForm, extra=1, can_delete=True
 )
