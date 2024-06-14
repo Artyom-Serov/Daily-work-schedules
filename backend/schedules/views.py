@@ -117,7 +117,7 @@ def work_delete(request, pk):
 @login_required
 def resource_create(request, work_pk):
     work = get_object_or_404(Work, pk=work_pk)
-    template = 'schedules/resource_form.html'
+    template = 'schedules/resource_create.html'
     if request.method == "POST":
         form = ResourceForm(request.POST)
         if form.is_valid():
@@ -127,13 +127,15 @@ def resource_create(request, work_pk):
             return redirect('schedules:work_update', pk=work.pk)
     else:
         form = ResourceForm()
-    return render(request, template, {'form': form, 'work_pk': work_pk})
+    return render(request, template, {
+        'form': form, 'work_pk': work_pk
+    })
 
 
 @login_required
 def resource_update(request, pk):
     resource = get_object_or_404(Resource, pk=pk)
-    template = 'schedules/resource_form.html'
+    template = 'schedules/resource_update.html'
     work = resource.work
     if request.method == "POST":
         form = ResourceForm(request.POST, instance=resource)
@@ -142,7 +144,9 @@ def resource_update(request, pk):
             return redirect('schedules:work_update', pk=work.pk)
     else:
         form = ResourceForm(instance=resource)
-    return render(request, template, {'form': form})
+    return render(request, template, {
+        'form': form, 'work_pk': work.pk
+    })
 
 
 @login_required
@@ -153,4 +157,6 @@ def resource_delete(request, pk):
     if request.method == "POST":
         resource.delete()
         return redirect('schedules:work_update', pk=work.pk)
-    return render(request, template, {'resource': resource})
+    return render(request, template, {
+        'resource': resource, 'work_pk': work.pk
+    })

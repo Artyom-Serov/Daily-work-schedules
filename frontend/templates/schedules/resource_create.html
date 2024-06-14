@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Создание ресурса{% endblock %}
+
+{% block content %}
+    <h2>Создать ресурс</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button delete">Сохранить</button>
+        <a href="{% url 'schedules:work_update' pk=work_pk %}" class="button">Отмена</a>
+    </form>
+{% endblock %}
