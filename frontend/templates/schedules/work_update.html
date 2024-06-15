@@ -1,18 +1,49 @@
 {% extends 'base.html' %}
 
-{% block title %}Редактировать работу{% endblock %}
+{% block title %}Редактирование работы{% endblock %}
 
 {% block content %}
     <h2>Редактировать работу</h2>
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        <div class="form-group">
+            <label for="{{ form.name.id_for_label }}">Вид работ</label>
+            {{ form.name }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.start_date.id_for_label }}">Дата начала</label>
+            {{ form.start_date }}
+            <input type="date" id="id_start_date_picker">
+        </div>
+        <div class="form-group">
+            <label for="{{ form.end_date.id_for_label }}">Дата окончания</label>
+            {{ form.end_date }}
+            <input type="date" id="id_end_date_picker">
+        </div>
         <button type="submit" class="button delete">Сохранить</button>
         <a href="{% url 'schedules:schedule_detail' pk=schedule_pk %}" class="button">Отмена</a>
     </form>
-    <h3>Ресурсы</h3>
-    <form method="post" action="{% url 'schedules:resource_create' work_pk=form.instance.pk %}">
-        {% csrf_token %}
-        <button type="submit" class="button">Добавить ресурс</button>
-    </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Инициализация datepicker для поля start_date
+            let startDateInput = document.getElementById('id_start_date_picker');
+            startDateInput.value = "{{ form.instance.start_date|date:'Y-m-d' }}"; // Установка текущего значения
+            startDateInput.addEventListener('change', function() {
+                let selectedDate = new Date(startDateInput.value);
+                let formattedDate = selectedDate.toLocaleDateString('ru-RU'); // Преобразование в формат "дд.мм.гггг"
+                document.getElementById('{{ form.start_date.id_for_label }}').value = formattedDate;
+            });
+
+            // Инициализация datepicker для поля end_date
+            let endDateInput = document.getElementById('id_end_date_picker');
+            endDateInput.value = "{{ form.instance.end_date|date:'Y-m-d' }}"; // Установка текущего значения
+            endDateInput.addEventListener('change', function() {
+                let selectedDate = new Date(endDateInput.value);
+                let formattedDate = selectedDate.toLocaleDateString('ru-RU'); // Преобразование в формат "дд.мм.гггг"
+                document.getElementById('{{ form.end_date.id_for_label }}').value = formattedDate;
+            });
+        });
+    </script>
 {% endblock %}
+

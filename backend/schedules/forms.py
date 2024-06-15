@@ -23,10 +23,6 @@ class WorkForm(forms.ModelForm):
             'start_date': 'Дата начала',
             'end_date': 'Дата окончания',
         }
-        widgets = {
-            'start_date': forms.DateInput(attrs={'type': 'date'}),
-            'end_date': forms.DateInput(attrs={'type': 'date'}),
-        }
 
 
 class ResourceForm(forms.ModelForm):
