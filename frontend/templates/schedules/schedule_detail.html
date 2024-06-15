@@ -8,7 +8,7 @@
     <p>Автор: {{ schedule.author.first_name }} {{ schedule.author.last_name }}.
        Последние изменения: {{ schedule.last_modified|date:"d.m.Y" }}</p>
 
-    <h3>Работы</h3>
+    <h3>Перечень работ</h3>
     <table>
         <thead>
             <tr>
@@ -16,6 +16,9 @@
                 <th>Вид работ</th>
                 <th>Дата начала</th>
                 <th>Дата окончания</th>
+                {% if user.is_authenticated and user == schedule.author %}
+                <th>Действия</th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
@@ -36,12 +39,18 @@
                 </tr>
             {% endfor %}
         </tbody>
+    </table>
+    <h3>Перечень ресурсов</h3>
+    <table>
         <thead>
             <tr>
                 <th>№ п/п</th>
                 <th>Наименование ресурса</th>
                 <th>Количество</th>
                 <th>Единицы измерения</th>
+                {% if user.is_authenticated and user == schedule.author %}
+                <th>Действия</th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
