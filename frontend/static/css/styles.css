@@ -5,8 +5,11 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #FAF0E6;
-    /* background-image: url(background.jpeg) */
+    /*  background-color: #FAF0E6; */
+    background-image: url('../images/background.jpeg');
+    background-size: cover; /* Масштабирование изображения на весь экран */
+    background-position: center; /* Позиционирование изображения по центру */
+    background-repeat: no-repeat; /* Запрет повтора фонового изображения */
 }
 
 header {
