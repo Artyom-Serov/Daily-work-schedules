@@ -13,8 +13,9 @@ body {
 }
 
 header {
-    color: #DCDCDC;
-    background: #2E8B57;
+    color: #2F4F4F;
+    /* background: #2E8B57; */
+    background: rgba(46, 139, 87, 0.4);
     padding: 10px;
     text-align: center;
 }
@@ -28,7 +29,8 @@ main {
 }
 
 footer {
-    background: #3CB371;
+    /* background: #3CB371; */
+    background: rgba(160, 82, 45, 0.3);
     padding: 10px;
     text-align: center;
     position: relative;
