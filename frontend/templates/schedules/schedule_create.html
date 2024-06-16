@@ -1,16 +1,21 @@
 {% extends 'base.html' %}
 
-{% block title %}Создать график{% endblock %}
+{% block title %}Создание графика{% endblock %}
 
 {% block content %}
     <h2>Создать график</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <h3>Указать вид работ</h3>
-        {{ work_form.as_p }}
-        <button type="submit" class="button delete">Сохранить</button>
-        <a href="{% url 'schedules:schedule_list' %}" class="button">К списку графиков</a>
-    </form>
+    <div class="schedule-create-container">
+        <div class="schedule-create-item">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+            <h3>Указать вид работ</h3>
+                {{ work_form.as_p }}
+                <button type="submit" class="button delete">Сохранить</button>
+                <a href="{% url 'schedules:schedule_list' %}" class="button">
+                    К списку графиков
+                </a>
+            </form>
+        </div>
+    </div>
 {% endblock %}
-
