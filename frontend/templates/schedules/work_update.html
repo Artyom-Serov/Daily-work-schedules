@@ -28,6 +28,13 @@
                    class="button">Отмена</a>
             </form>
         </div>
+        <div class="schedule-create-item">
+            <h3>Ресурсы</h3>
+            <form method="post" action="{% url 'schedules:resource_create' work_pk=form.instance.pk %}">
+                {% csrf_token %}
+                <button type="submit" class="button">Добавить ресурс</button>
+            </form>
+        </div>
     </div>
 
     <script>

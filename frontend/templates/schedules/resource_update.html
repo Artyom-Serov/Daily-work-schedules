@@ -4,10 +4,15 @@
 
 {% block content %}
     <h2>Редактировать ресурс</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="button delete">Сохранить</button>
-        <a href="{% url 'schedules:work_update' pk=work_pk %}" class="button">Отмена</a>
-    </form>
+    <div class="schedule-create-container">
+        <div class="schedule-create-item">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="button delete">Сохранить</button>
+                <a href="{% url 'schedules:work_update' pk=work_pk %}" class="button">
+                    Отмена</a>
+            </form>
+        </div>
+    </div>
 {% endblock %}
