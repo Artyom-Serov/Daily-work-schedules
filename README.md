@@ -84,11 +84,9 @@ python manage.py runserver
 
 ![Main](https://github.com/Artyom-Serov/Daily-work-schedules/assets/126283343/49ae6465-9b24-44ba-bbd6-83803efaa7df)
 
-
 #### Страница графика
 
-![Schedule](https://github.com/Artyom-Serov/Daily-work-schedules/assets/126283343/5bf5c8c3-ecd0-4df3-986a-024014f8b06f)
-
+![Schedule](https://github.com/Artyom-Serov/Daily-work-schedules/assets/126283343/d8963abc-3705-4bb3-9400-2d252a8178ec)
 
 ### Планы по развитию проекта
 
