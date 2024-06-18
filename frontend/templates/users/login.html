@@ -4,9 +4,13 @@
 
 {% block content %}
     <h2>Авторизация</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="button">Войти</button>
-    </form>
+    <div class="profile-container">
+        <div class="profile-item">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="button">Войти</button>
+            </form>
+        </div>
+    </div>
 {% endblock %}

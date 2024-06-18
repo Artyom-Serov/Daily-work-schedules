@@ -124,7 +124,7 @@ th {
     background: rgba(255, 255, 255, 0.8); /* Прозрачный фон для контейнера */
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Тень для контейнера */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4); /* Тень для контейнера */
     box-sizing: border-box; /* Учитываем padding и border в ширине и высоте элемента */
     max-width: 600px;  /* Максимальная ширина контейнера */
     margin-bottom: 10px;  /* Расстояние между блоками с графиками */
@@ -166,7 +166,7 @@ th {
     background: rgba(255, 255, 255, 0.8); /* Прозрачный фон для контейнера */
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Тень для контейнера */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4); /* Тень для контейнера */
     box-sizing: border-box; /* Учитываем padding и border в ширине и высоте элемента */
 }
 
@@ -180,7 +180,22 @@ th {
     background: rgba(255, 255, 255, 0.8); /* Прозрачный фон для контейнера */
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Тень для контейнера */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4); /* Тень для контейнера */
     box-sizing: border-box; /* Учитываем padding и border в ширине и высоте элемента */
     max-width: 700px;  /* Максимальная ширина контейнера */
+}
+/* Контейнеры для страниц пользователя */
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Расстояние между блоками */
+}
+
+.profile-item {
+    background: rgba(255, 255, 255, 0.8); /* Прозрачный фон для контейнера */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4); /* Тень для контейнера */
+    box-sizing: border-box; /* Учитываем padding и border в ширине и высоте элемента */
+    max-width: 600px;  /* Максимальная ширина контейнера */
 }
